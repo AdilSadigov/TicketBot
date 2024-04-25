@@ -12,8 +12,8 @@ export const userSystemEnum = pgEnum("user_system_enum", ["system", "user"]);
 
 export const chats = pgTable("chats", {
   id: serial("id").primaryKey(),
-  chatName: text("chat_name").notNull(),
-  chatUrl: text("chat_url").notNull(),
+  pdfName: text("pdf_name").notNull(),
+  pdfUrl: text("pdf_url").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   userId: varchar("user_id", { length: 256 }).notNull(),
   fileKey: text("file_key").notNull(),
@@ -28,3 +28,6 @@ export const messages = pgTable("messages", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
   role: userSystemEnum("role").notNull(),
 });
+
+// drizzle-orm
+// drizzle-kit
