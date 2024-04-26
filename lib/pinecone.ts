@@ -34,11 +34,10 @@ export async function loadS3IntoPinecone(fileKey: string) {
     
     const namespace = convertToAscii(fileKey);
 
-    await index.namespace(namespace);
+    await index.namespace(namespace).upsert(vectors);
     return documents;
   } catch (error) {
     console.log(error);
-    console.log('dassag')
   }
 }
 

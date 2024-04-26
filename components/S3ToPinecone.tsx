@@ -30,7 +30,7 @@ const ChatCreater = () => {
         onSuccess: (data) => {
           console.log("Mutation succeeded with data:", data);
           toast.success("Chat created!");
-          router.push(`/chat/${data.chat_id}`);
+          // router.push(`/chat/${data.chat_id}`);
         },
         onError: (error) => {
           console.error("Mutation failed with error:", error);

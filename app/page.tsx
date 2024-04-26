@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { UserButton, auth } from "@clerk/nextjs";
 import Link from "next/link";
 import { LogIn } from "lucide-react";
-import ChatCreater from "@/components/Chat";
+import ChatCreater from "@/components/S3ToPinecone";
 
 export default async function Home() {
   const { userId } = await auth();
