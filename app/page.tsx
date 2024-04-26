@@ -1,7 +1,10 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { UserButton, auth } from "@clerk/nextjs";
 import Link from "next/link";
 import { LogIn } from "lucide-react";
+import { loadS3IntoPinecone } from "@/lib/pinecone";
 
 export default async function Home() {
   const { userId } = await auth();
@@ -17,7 +20,11 @@ export default async function Home() {
           </div>
 
           <div className="flex mt-2">    
-            {isAuth && <Button>Go to Chats</Button>}
+            {isAuth && 
+              <Button onClick={() => loadS3IntoPinecone('data.pdf')}>
+                Go to Chats
+              </Button>
+            }
           </div>
 
           <p className="max-w-2xl mt-1 text-lg text-slate-400">

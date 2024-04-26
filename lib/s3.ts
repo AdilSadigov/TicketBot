@@ -10,7 +10,7 @@ export async function uploadToS3(file: File) {
       params: {
         Bucket: process.env.NEXT_PUBLIC_S3_BUCKET_NAME,
       },
-      region: "eu-central-1",
+      region: "eu-north-1",
     });
 
     const file_key = `uploads/${Date.now().toString()}_${file.name.replaceAll(" ", "-")}`;
