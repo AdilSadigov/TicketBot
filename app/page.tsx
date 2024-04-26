@@ -1,10 +1,8 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { UserButton, auth } from "@clerk/nextjs";
 import Link from "next/link";
 import { LogIn } from "lucide-react";
-import { loadS3IntoPinecone } from "@/lib/pinecone";
+import ChatCreater from "@/components/Chat";
 
 export default async function Home() {
   const { userId } = await auth();
@@ -21,9 +19,7 @@ export default async function Home() {
 
           <div className="flex mt-2">    
             {isAuth && 
-              <Button onClick={() => loadS3IntoPinecone('data.pdf')}>
-                Go to Chats
-              </Button>
+              <ChatCreater/>
             }
           </div>
 
