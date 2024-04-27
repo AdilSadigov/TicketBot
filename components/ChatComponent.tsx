@@ -11,13 +11,27 @@ import { Message } from "ai";
 
 type Props = { chatId: number };
 
-const ChatComponent = (props: Props) => {
+const ChatComponent = (chatId: Props) => {
+  
   const { input, handleInputChange, handleSubmit, messages } = useChat({
     api: "/api/chat",
-
+    body: {
+      chatId
+    }
   });
+
+  React.useEffect(() => {
+    const messageContainer = document.getElementById("message-container");
+    if (messageContainer) {
+      messageContainer.scrollTo({
+        top: messageContainer.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [messages]);
+
   return (
-    <div className="relative max-h-screen w-3/4 overflow-y-auto custom-scroll">
+    <div className="relative max-h-screen w-3/4 overflow-y-auto custom-scroll" id="message-container">
       {/* header */}
       <div className="sticky top-0 inset-x-0 p-2 bg-white h-fit">
         <h3 className="text-xl font-bold">Chat</h3>
@@ -28,14 +42,14 @@ const ChatComponent = (props: Props) => {
 
       <form
         onSubmit={handleSubmit}
-        className="sticky bottom-0 inset-x-0 px-2 py-2 bg-white mt-2 input-no-outline"
+        className="sticky bottom-0 inset-x-0 px-2 py-2 bg-white mt-2"
       >
         <div className="flex">
           <Input
             value={input}
             onChange={handleInputChange}
             placeholder="Ask any question..."
-            className="w-full input-no-outline"
+            className="w-full"
           />
           <Button className="bg-blue-600 ml-2">
             <Send className="h-4 w-4" />
