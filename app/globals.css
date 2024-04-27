@@ -83,3 +83,17 @@
     visibility: hidden;
     position: inherit;
   }
+
+  .custom-scroll {
+    
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+  }
+
+  .custom-scroll::-webkit-scrollbar {
+    display: none; 
+  }
+
+  .input-no-outline:focus {
+    outline: none !important; /* Используйте !important, чтобы убедиться, что стиль переопределяет другие правила */
+  }

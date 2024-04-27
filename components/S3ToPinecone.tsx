@@ -20,7 +20,6 @@ const ChatCreater = () => {
 
   const handleClick = async () => {
     try {
-      // Данные, которые нужно передать в мутацию (в вашем случае, file_key и file_name)
       const data = {
         file_key: "data.pdf",
         file_name: "data.pdf",
@@ -30,7 +29,7 @@ const ChatCreater = () => {
         onSuccess: (data) => {
           console.log("Mutation succeeded with data:", data);
           toast.success("Chat created!");
-          // router.push(`/chat/${data.chat_id}`);
+          router.push(`/chat/${data.chat_id}`);
         },
         onError: (error) => {
           console.error("Mutation failed with error:", error);
