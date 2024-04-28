@@ -42,7 +42,7 @@ const ChatComponent = (chatId: Props) => {
   }, [messages]);
 
   return (
-    <div className="relative max-h-screen w-3/4 overflow-y-auto custom-scroll" id="message-container">
+    <div className="relative max-h-screen w-3/4">
       {/* header */}
       <div className="sticky top-0 inset-x-0 p-2 bg-white h-fit">
         <h3 className="text-xl font-bold">Chat</h3>
