@@ -8,6 +8,17 @@ type Props = {
   messages: Message[];
 };
 
+// Функция для преобразования текста с **жирным** текстом
+const renderTextWithBold = (text: string) => {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>;
+    }
+    return part;
+  });
+};
+
 const MessageList = ({ messages, isLoading }: Props) => {
   if (isLoading) {
     return (
@@ -18,30 +29,34 @@ const MessageList = ({ messages, isLoading }: Props) => {
   }
 
   if (!messages) return <></>;
+
   return (
-    <div className="flex flex-col gap-2 px-4 mb-1">
-      {messages.map((message) => {
-        return (
+    <div id="message-container" className="flex flex-col gap-2 px-4 mb-1">
+      {messages.map((message) => (
+        <div
+          key={message.id}
+          className={cn("flex", {
+            "justify-end pl-10 my-1": message.role === "user",
+            "justify-start pr-10 my-1": message.role === "assistant",
+          })}
+        >
           <div
-            key={message.id}
-            className={cn("flex", {
-              "justify-end pl-10 my-1": message.role === "user",
-              "justify-start pr-10 my-1": message.role === "assistant",
-            })}
+            className={cn(
+              "rounded-lg px-3 text-sm py-1.5 shadow-md ring-1 ring-gray-900/10",
+              {
+                "bg-blue-600 text-white": message.role === "user",
+              }
+            )}
           >
-            <div
-              className={cn(
-                "rounded-lg px-3 text-sm py-1.5 shadow-md ring-1 ring-gray-900/10",
-                {
-                  "bg-blue-600 text-white": message.role === "user",
-                }
-              )}
-            >
-              <p>{message.content}</p>
-            </div>
+            {message.content.split('\n').map((line, index) => (
+              <React.Fragment key={index}>
+                {renderTextWithBold(line)}
+                <br />
+              </React.Fragment>
+            ))}
           </div>
-        );
-      })}
+        </div>
+      ))}
     </div>
   );
 };
