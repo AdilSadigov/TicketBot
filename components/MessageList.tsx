@@ -8,10 +8,13 @@ type Props = {
   messages: Message[];
 };
 
-// Функция для преобразования текста с **жирным** текстом
-const renderTextWithBold = (text: string) => {
-  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+// Function to render text with **bold** and ### headers
+const renderTextWithFormatting = (text: string) => {
+  const parts = text.split(/(### [^\n]+|\*\*[^*]+\*\*)/g);
   return parts.map((part, index) => {
+    if (part.startsWith("### ")) {
+      return <h3 key={index} className="text-lg font-bold">{part.slice(4)}</h3>;
+    }
     if (part.startsWith("**") && part.endsWith("**")) {
       return <strong key={index}>{part.slice(2, -2)}</strong>;
     }
@@ -50,7 +53,7 @@ const MessageList = ({ messages, isLoading }: Props) => {
           >
             {message.content.split('\n').map((line, index) => (
               <React.Fragment key={index}>
-                {renderTextWithBold(line)}
+                {renderTextWithFormatting(line)}
                 <br />
               </React.Fragment>
             ))}

@@ -47,9 +47,17 @@ export async function POST(req: Request) {
       You do not apologize for previous responses, but instead indicate that new information has been gained.
       You do not invent any information that is not directly drawn from the context.
     
-      Please greet the user and briefly describe your purpose and how you can assist them.
+      Please greet the user and briefly describe your purpose and how you can assist them in the first message. Use emojis where appropriate.
+      In subsequent messages, focus on providing information and assistance without repeating the greeting or previous responses. Avoid using "###" or similar formatting.
+      
+      ---
+      
+      👋 Hello! I'm here to help you find the best flight tickets based on your preferences. Whether you're looking for the best deals, fastest routes, or most convenient schedules, I've got you covered. Let's find your perfect flight! 🛫
       `,
     };
+
+
+    
     
 
     const response = await openai.createChatCompletion({
